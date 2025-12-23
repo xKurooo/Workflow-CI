@@ -24,7 +24,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install mlflow dagshub scikit-learn pandas numpy joblib matplotlib setuptools
 
-      - name: Run MLflow Project (Official Retraining)
+      - name: Run MLflow Project
         run: |
           # Perintah resmi sesuai kriteria penguji
           mlflow run MLProject/ --env-manager local
@@ -35,4 +35,4 @@ jobs:
 
       - name: Build Status Notification
         if: success()
-        run: echo "Retraining Berhasil!"
+        run: echo "Retraining via MLflow Project Berhasil!"
