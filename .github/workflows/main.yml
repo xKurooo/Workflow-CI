@@ -24,16 +24,15 @@ jobs:
           python -m pip install --upgrade pip
           pip install mlflow dagshub scikit-learn pandas numpy joblib matplotlib setuptools
 
-      - name: Run MLflow Project (Retraining)
+      - name: Run MLflow Project (Official Retraining)
         run: |
-          # Menjalankan retraining secara resmi menggunakan MLflow CLI
+          # Perintah resmi sesuai kriteria penguji
           mlflow run MLProject/ --env-manager local
         env:
-          # Pastikan Secret ini sudah terpasang di GitHub Settings > Secrets > Actions
           MLFLOW_TRACKING_USERNAME: ${{ secrets.MLFLOW_USERNAME }}
           MLFLOW_TRACKING_PASSWORD: ${{ secrets.MLFLOW_PASSWORD }}
           DAGSHUB_CLIENT_TOKEN: ${{ secrets.MLFLOW_PASSWORD }}
 
       - name: Build Status Notification
         if: success()
-        run: echo "CI Pipeline Berhasil dijalankan dan Model telah di-retrain."
+        run: echo "Retraining Berhasil!"
