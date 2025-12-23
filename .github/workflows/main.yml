@@ -22,16 +22,16 @@ jobs:
       - name: Install Dependencies
         run: |
           python -m pip install --upgrade pip
-          # Menginstal semua library yang dibutuhkan langsung di environment runner
           pip install mlflow dagshub scikit-learn pandas numpy joblib matplotlib setuptools
 
       - name: Run MLflow Project
         run: |
-          # Menggunakan --env-manager local untuk bypass pembuatan conda env oleh MLflow
-          # Ini memperbaiki error "activate: No such file or directory"
-          mlflow run MLProject/ -e main --env-manager local
+          # PERUBAHAN DI SINI:
+          # Kita masuk ke folder MLProject dan jalankan python secara langsung.
+          # Ini menghindari bug ID Run pada perintah 'mlflow run' di GitHub Actions.
+          cd MLProject
+          python modelling.py
         env:
-          # Pastikan Secret ini sudah ada di Settings > Secrets > Actions di GitHub
           MLFLOW_TRACKING_USERNAME: ${{ secrets.MLFLOW_USERNAME }}
           MLFLOW_TRACKING_PASSWORD: ${{ secrets.MLFLOW_PASSWORD }}
           DAGSHUB_CLIENT_TOKEN: ${{ secrets.MLFLOW_PASSWORD }}
